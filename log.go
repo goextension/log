@@ -1,59 +1,125 @@
-package goextlog
+package log
 
-type ILog interface {
-	// Debug uses fmt.Sprint to construct and log a message.
-	Debug(args ...interface{})
-	// Info uses fmt.Sprint to construct and log a message.
-	Info(args ...interface{})
-	// Warn uses fmt.Sprint to construct and log a message.
-	Warn(args ...interface{})
-	// Error uses fmt.Sprint to construct and log a message.
-	Error(args ...interface{})
-	// DPanic uses fmt.Sprint to construct and log a message. In development, the
-	// logger then panics. (See DPanicLevel for details.)
-	DPanic(args ...interface{})
-	// Panic uses fmt.Sprint to construct and log a message, then panics.
-	Panic(args ...interface{})
-	// Fatal uses fmt.Sprint to construct and log a message, then calls os.Exit.
-	Fatal(args ...interface{})
-	// Debugf uses fmt.Sprintf to log a templated message.
-	Debugf(template string, args ...interface{})
-	// Infof uses fmt.Sprintf to log a templated message.
-	Infof(template string, args ...interface{})
-	// Warnf uses fmt.Sprintf to log a templated message.
-	Warnf(template string, args ...interface{})
-	// Errorf uses fmt.Sprintf to log a templated message.
-	Errorf(template string, args ...interface{})
-	// DPanicf uses fmt.Sprintf to log a templated message. In development, the
-	// logger then panics. (See DPanicLevel for details.)
-	DPanicf(template string, args ...interface{})
-	// Panicf uses fmt.Sprintf to log a templated message, then panics.
-	Panicf(template string, args ...interface{})
-	// Fatalf uses fmt.Sprintf to log a templated message, then calls os.Exit.
-	Fatalf(template string, args ...interface{})
-	// Debugw logs a message with some additional context. The variadic key-value
-	// pairs are treated as they are in With.
-	//
-	// When debug-level logging is disabled, this is much faster than
-	//  s.With(keysAndValues).Debug(msg)
-	Debugw(msg string, keysAndValues ...interface{})
-	// Infow logs a message with some additional context. The variadic key-value
-	// pairs are treated as they are in With.
-	Infow(msg string, keysAndValues ...interface{})
-	// Warnw logs a message with some additional context. The variadic key-value
-	// pairs are treated as they are in With.
-	Warnw(msg string, keysAndValues ...interface{})
-	// Errorw logs a message with some additional context. The variadic key-value
-	// pairs are treated as they are in With.
-	Errorw(msg string, keysAndValues ...interface{})
-	// DPanicw logs a message with some additional context. In development, the
-	// logger then panics. (See DPanicLevel for details.) The variadic key-value
-	// pairs are treated as they are in With.
-	DPanicw(msg string, keysAndValues ...interface{})
-	// Panicw logs a message with some additional context, then panics. The
-	// variadic key-value pairs are treated as they are in With.
-	Panicw(msg string, keysAndValues ...interface{})
-	// Fatalw logs a message with some additional context, then calls os.Exit. The
-	// variadic key-value pairs are treated as they are in With.
-	Fatalw(msg string, keysAndValues ...interface{})
+var log Logger
+
+func Register(logger Logger) {
+	log = logger
+}
+
+// Debug uses fmt.Sprint to construct and log a message.
+func Debug(args ...interface{}) {
+	log.Debug(args...)
+}
+
+// Info uses fmt.Sprint to construct and log a message.
+func Info(args ...interface{}) {
+	log.Info(args...)
+}
+
+// Warn uses fmt.Sprint to construct and log a message.
+func Warn(args ...interface{}) {
+	log.Warn(args...)
+}
+
+// Error uses fmt.Sprint to construct and log a message.
+func Error(args ...interface{}) {
+	log.Error(args...)
+}
+
+// DPanic uses fmt.Sprint to construct and log a message. In development, the
+// logger then panics. (See DPanicLevel for details.)
+func DPanic(args ...interface{}) {
+	log.DPanic(args...)
+}
+
+// Panic uses fmt.Sprint to construct and log a message, then panics.
+func Panic(args ...interface{}) {
+	log.Panic(args...)
+}
+
+// Fatal uses fmt.Sprint to construct and log a message, then calls os.Exit.
+func Fatal(args ...interface{}) {
+	log.Fatal(args...)
+}
+
+// Debugf uses fmt.Sprintf to log a templated message.
+func Debugf(template string, args ...interface{}) {
+	log.Debugf(template, args...)
+}
+
+// Infof uses fmt.Sprintf to log a templated message.
+func Infof(template string, args ...interface{}) {
+	log.Infof(template, args...)
+}
+
+// Warnf uses fmt.Sprintf to log a templated message.
+func Warnf(template string, args ...interface{}) {
+	log.Warnf(template, args...)
+}
+
+// Errorf uses fmt.Sprintf to log a templated message.
+func Errorf(template string, args ...interface{}) {
+	log.Errorf(template, args...)
+}
+
+// DPanicf uses fmt.Sprintf to log a templated message. In development, the
+// logger then panics. (See DPanicLevel for details.)
+func DPanicf(template string, args ...interface{}) {
+	log.DPanicf(template, args...)
+}
+
+// Panicf uses fmt.Sprintf to log a templated message, then panics.
+func Panicf(template string, args ...interface{}) {
+	log.Panicf(template, args...)
+}
+
+// Fatalf uses fmt.Sprintf to log a templated message, then calls os.Exit.
+func Fatalf(template string, args ...interface{}) {
+	log.Fatalf(template, args...)
+}
+
+// Debugw logs a message with some additional context. The variadic key-value
+// pairs are treated as they are in With.
+//
+// When debug-level logging is disabled, this is much faster than
+//  s.With(keysAndValues).Debug(msg)
+func Debugw(msg string, keysAndValues ...interface{}) {
+	log.Debugw(msg, keysAndValues...)
+}
+
+// Infow logs a message with some additional context. The variadic key-value
+// pairs are treated as they are in With.
+func Infow(msg string, keysAndValues ...interface{}) {
+	log.Infow(msg, keysAndValues...)
+}
+
+// Warnw logs a message with some additional context. The variadic key-value
+// pairs are treated as they are in With.
+func Warnw(msg string, keysAndValues ...interface{}) {
+	log.Warnw(msg, keysAndValues)
+}
+
+// Errorw logs a message with some additional context. The variadic key-value
+// pairs are treated as they are in With.
+func Errorw(msg string, keysAndValues ...interface{}) {
+	log.Errorw(msg, keysAndValues...)
+}
+
+// DPanicw logs a message with some additional context. In development, the
+// logger then panics. (See DPanicLevel for details.) The variadic key-value
+// pairs are treated as they are in With.
+func DPanicw(msg string, keysAndValues ...interface{}) {
+	log.DPanicw(msg, keysAndValues...)
+}
+
+// Panicw logs a message with some additional context, then panics. The
+// variadic key-value pairs are treated as they are in With.
+func Panicw(msg string, keysAndValues ...interface{}) {
+	log.Panicw(msg, keysAndValues...)
+}
+
+// Fatalw logs a message with some additional context, then calls os.Exit. The
+// variadic key-value pairs are treated as they are in With.
+func Fatalw(msg string, keysAndValues ...interface{}) {
+	log.Fatalw(msg, keysAndValues...)
 }
