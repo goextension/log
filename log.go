@@ -6,6 +6,10 @@ func Register(logger Logger) {
 	log = logger
 }
 
+func Log() Logger {
+	return log
+}
+
 // Debug uses fmt.Sprint to construct and log a message.
 func Debug(args ...interface{}) {
 	log.Debug(args...)
