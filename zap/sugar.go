@@ -29,7 +29,10 @@ func InitZapFileSugar() {
 		DefaultZapFilePath,
 	}
 
-	logger, e := cfg.Build()
+	logger, e := cfg.Build(
+		zap.AddCaller(),
+		zap.AddCallerSkip(1),
+	)
 	if e != nil {
 		panic(e)
 	}
