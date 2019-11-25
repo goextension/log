@@ -100,7 +100,7 @@ func Infow(msg string, keysAndValues ...interface{}) {
 // Warnw logs a message with some additional context. The variadic key-value
 // pairs are treated as they are in With.
 func Warnw(msg string, keysAndValues ...interface{}) {
-	log.Warnw(msg, keysAndValues)
+	log.Warnw(msg, keysAndValues...)
 }
 
 // Errorw logs a message with some additional context. The variadic key-value
